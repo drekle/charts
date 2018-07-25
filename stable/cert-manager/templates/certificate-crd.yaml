@@ -3,6 +3,10 @@ apiVersion: apiextensions.k8s.io/v1beta1
 kind: CustomResourceDefinition
 metadata:
   name: certificates.certmanager.k8s.io
+  {{- if .Values.customResourceAnnotations }}
+  annotations:
+{{ toYaml .Values.customResourceAnnotations | indent 4 }}
+  {{- end }}
   labels:
     app: {{ template "cert-manager.name" . }}
     chart: {{ template "cert-manager.chart" . }}
